@@ -32,7 +32,9 @@
       in
       {
         # Expose the raw source for downstream Nix builds (crane merged-src).
-        packages.src = pkgs.lib.cleanSource ./.;
+        packages.src = pkgs.runCommand "bevy-wasm-core-src" { } ''
+          cp -r ${pkgs.lib.cleanSource ./.}/. $out
+        '';
 
         devShells.default = pkgs.mkShell {
           buildInputs = [
