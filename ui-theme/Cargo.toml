@@ -1,0 +1,12 @@
+[package]
+name = "ui-theme"
+version = "0.1.0"
+edition = "2021"
+description = "Shared egui styling for WASM projects"
+
+[dependencies]
+egui = "0.30"
+egui_plot = "0.30"
+
+[build-dependencies]
+serde_json = "1.0"

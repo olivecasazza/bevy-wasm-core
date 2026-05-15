@@ -1,0 +1,38 @@
+[package]
+name = "bevy-core"
+version = "0.1.0"
+edition = "2021"
+description = "Shared Bevy plugins for WASM visualization projects"
+
+[dependencies]
+# Bevy with minimal features for WASM
+bevy = { version = "0.15", default-features = false, features = [
+    "bevy_asset",
+    "bevy_render",
+    "bevy_winit",
+    "bevy_core_pipeline",
+    "bevy_sprite",
+    "bevy_pbr",
+    "webgl2",
+    "png",
+    "x11"  # Linux support
+] }
+
+# egui integration
+bevy_egui = "0.32"
+
+# Shared UI theme
+ui-theme = { path = "../ui-theme" }
+
+# Math
+nalgebra = "0.33"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+web-sys = { version = "0.3", features = ["Window", "Document", "HtmlCanvasElement", "Performance"] }
+js-sys = "0.3"
+getrandom = { version = "0.3", features = ["wasm_js"] }
+
+# Disable wasm-opt (consistency with other crates)
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
